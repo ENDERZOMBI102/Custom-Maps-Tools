@@ -40,11 +40,15 @@ public class ConfigHandler {
 		public static String windowTitle = "Minecraft 1.12.2";
 		
 		@Name("Game window icon")
-		@Comment({"the game window icon to a png", "relative to the game instance folder", "leave blank for default icon"})
-		public static String [] iconPath = {"", ""};
+		@Comment({"set the game window icon to a png", "relative to the game instance folder", "leave blank for default icon"})
+		public static String iconPath16 = "";
 		
-		@Name("Minium game window dimensions")
-		@Comment({"the game window will not be capable of being resized under this value","format: width,height"})
+		@Name("Game taskbar icon")
+		@Comment({"set the game taskbar icon to a png", "relative to the game instance folder", "leave blank for default icon"})
+		public static String iconPath32 = "";
+		
+		@Name("Minimum game window dimensions")
+		@Comment({"the game window will not be capable of resizing under this value","format: width,height"})
 		public static String minWinDimension = "854, 480";
 
 	}	

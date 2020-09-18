@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.opengl.Display;
 
@@ -46,38 +48,40 @@ public class ClientTweaker {
 	public void updateIcon() {
 		// TODO: finish this shit
 		InputStream icon16 = null, icon32 = null;
-		LogHelper.logger.info(ConfigHandler.ConfigData.iconPath);
 		LogHelper.info("checking icons");
-		if ( ConfigHandler.ConfigData.iconPath[0] != "" ) {
+		LogHelper.info("16: ".concat(ConfigHandler.ConfigData.iconPath16));
+		LogHelper.info("32: ".concat(ConfigHandler.ConfigData.iconPath32));
+		if ( ConfigHandler.ConfigData.iconPath16 != "" ) {
 			try {
-				icon16 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath[0] ) );
+				icon16 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath16 ) );
 			} catch (IOException e) {
 				LogHelper.error("the 16x16 icon path is wrong or the file doesn't exist, aborting.");
 				return;
 			}
-		}
-		else {
+		} else {
 			try {
 				icon16 = mcinstance.mcDefaultResourcePack.getInputStream( new ResourceLocation("icons/icon_16x16.png") );
 			} catch (IOException e) {}
 		}
-		if ( ConfigHandler.ConfigData.iconPath[1] != "" ) {
+		if ( ConfigHandler.ConfigData.iconPath32 != "" ) {
 			try {
-				icon32 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath[1] ) );
+				icon32 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath32 ) );
 			} catch (IOException e) {
 				LogHelper.error("the 32x32 icon path is wrong or the file doesn't exist, aborting.");
 				return;
 			}
-		}
-		else {
+		} else {
 			try {
 				icon32 = mcinstance.mcDefaultResourcePack.getInputStream( new ResourceLocation("icons/icon_32x32.png") );
 			} catch (IOException e) {}
 		}
 		// it exists
 		try {
-			//read it
-			ByteBuffer [] buf = { Utilities.readImageToBuffer(icon16), Utilities.readImageToBuffer(icon32) };
+			// read the image, resize it and convert it to a ByteBuffer
+			ByteBuffer [] buf = { 
+					Utilities.toByteBuffer( Utilities.resizeImage( ImageIO.read(icon16), 16 ) ), 
+					Utilities.toByteBuffer( Utilities.resizeImage( ImageIO.read(icon32), 32 ) )
+				};
 			LogHelper.info("setting icon..");
 			// set the icon
 			Display.setIcon(buf);
