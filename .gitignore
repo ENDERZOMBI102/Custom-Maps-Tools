@@ -1,5 +1,6 @@
 # eclipse
 bin
+eclipse
 *.launch
 .settings
 .metadata
@@ -8,11 +9,6 @@ bin
 
 # gradle
 build
-.gradle
 
 # other
-eclipse
 run
-
-# Files from Forge MDK
-forge*changelog.txt

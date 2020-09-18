@@ -1,0 +1,16 @@
+[
+{
+  "modid": "cmt",
+  "name": "Custom Maps Tools",
+  "description": "The ultimate customization mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ENDERZOMBI102"],
+  "credits": "The Forge and FML guys, for making Forge",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
