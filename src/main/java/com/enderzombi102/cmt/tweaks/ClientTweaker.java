@@ -40,9 +40,13 @@ public class ClientTweaker {
 		
 	}
 	
-	public void updateIcons() {
+	public void updateIcon() {
+		String icon16path, icon32path;
+		if ( ConfigHandler.ConfigData.iconPath[0] != "" ) icon16path = ConfigHandler.ConfigData.iconPath[0];
+		if ( ConfigHandler.ConfigData.iconPath[1] != "" ) icon32path = ConfigHandler.ConfigData.iconPath[1];
+	}/*
 		String path;
-		if (ConfigHandler.ConfigData.iconPath != "") path = ConfigHandler.ConfigData.iconPath;
+		
 		
 		// get the file
 		File icons = {new File(), new File();
@@ -64,6 +68,6 @@ public class ClientTweaker {
 				LogHelper.error("Error while reading file: " + e);
 			}
 		}
-	}
+	}*/
 	
 }

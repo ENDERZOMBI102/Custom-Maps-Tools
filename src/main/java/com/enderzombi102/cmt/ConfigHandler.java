@@ -40,8 +40,8 @@ public class ConfigHandler {
 		public static String windowTitle = "Minecraft 1.12.2";
 		
 		@Name("Game window icon")
-		@Comment({"the game window icon to a png","relative to the game instance folder", "leave blank for default icon"})
-		public static String iconPath = "";
+		@Comment({"the game window icon to a png", "relative to the game instance folder", "leave blank for default icon"})
+		public static String [] iconPath = {"",""};
 		
 		@Name("Minium game window dimensions")
 		@Comment({"the game window will not be capable of being resized under this value","format: width,height"})

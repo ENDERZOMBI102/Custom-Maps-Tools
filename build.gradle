@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
         maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
@@ -56,7 +55,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-	implementation 'com.google.code.gson:gson:2.8.6'
+    //implementation 'com.google.code.gson:gson:2.8.6'
 
 }
 
