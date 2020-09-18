@@ -33,6 +33,7 @@ public class CustomMapsTools
     	MinecraftForge.EVENT_BUS.register( new ConfigHandler() );
         // creating log object
         logger = new LogHelper(event);
+        LogHelper.info( "Config directory path: ".concat( Utilities.getConfigDirPath() ) );
         CustomMapsTools.CTweaker = new ClientTweaker();
         CustomMapsTools.STweaker = new ServerTweaker();
         CTweaker.updateIcon();
