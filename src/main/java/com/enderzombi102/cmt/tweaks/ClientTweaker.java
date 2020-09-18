@@ -3,8 +3,11 @@ package com.enderzombi102.cmt.tweaks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import org.apache.commons.io.FileUtils;
@@ -41,33 +44,47 @@ public class ClientTweaker {
 	}
 	
 	public void updateIcon() {
-		String icon16path, icon32path;
-		if ( ConfigHandler.ConfigData.iconPath[0] != "" ) icon16path = ConfigHandler.ConfigData.iconPath[0];
-		if ( ConfigHandler.ConfigData.iconPath[1] != "" ) icon32path = ConfigHandler.ConfigData.iconPath[1];
-	}/*
-		String path;
-		
-		
-		// get the file
-		File icons = {new File(), new File();
-		// check if it exist
-		mcinstance.updateDisplay();
-		if (! icon.exists() ) {
-			LogHelper.error("The specified icon file doesn't exist");
-			return;
-		} else {
-			// it exists
+		// TODO: finish this shit
+		InputStream icon16 = null, icon32 = null;
+		LogHelper.logger.info(ConfigHandler.ConfigData.iconPath);
+		LogHelper.info("checking icons");
+		if ( ConfigHandler.ConfigData.iconPath[0] != "" ) {
 			try {
-				//read it
-				ByteBuffer [] buf = { Utilities.readImageToBuffer(stream), Utilities.readImageToBuffer(stream) };
-				LogHelper.info("setting icon..");
-				// set the icon
-				Display.setIcon(buf);
-				LogHelper.info("setted icon!");
-			} catch(Exception e) {
-				LogHelper.error("Error while reading file: " + e);
+				icon16 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath[0] ) );
+			} catch (IOException e) {
+				LogHelper.error("the 16x16 icon path is wrong or the file doesn't exist, aborting.");
+				return;
 			}
 		}
-	}*/
+		else {
+			try {
+				icon16 = mcinstance.mcDefaultResourcePack.getInputStream( new ResourceLocation("icons/icon_16x16.png") );
+			} catch (IOException e) {}
+		}
+		if ( ConfigHandler.ConfigData.iconPath[1] != "" ) {
+			try {
+				icon32 = FileUtils.openInputStream( new File( ConfigHandler.ConfigData.iconPath[1] ) );
+			} catch (IOException e) {
+				LogHelper.error("the 32x32 icon path is wrong or the file doesn't exist, aborting.");
+				return;
+			}
+		}
+		else {
+			try {
+				icon32 = mcinstance.mcDefaultResourcePack.getInputStream( new ResourceLocation("icons/icon_32x32.png") );
+			} catch (IOException e) {}
+		}
+		// it exists
+		try {
+			//read it
+			ByteBuffer [] buf = { Utilities.readImageToBuffer(icon16), Utilities.readImageToBuffer(icon32) };
+			LogHelper.info("setting icon..");
+			// set the icon
+			Display.setIcon(buf);
+			LogHelper.info("setted icon!");
+		} catch(Exception e) {
+			LogHelper.error("Error while reading file: " + e);
+		}
+	}
 	
 }

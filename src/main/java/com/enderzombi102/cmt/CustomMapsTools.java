@@ -10,7 +10,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.enderzombi102.cmt.tweaks.*;
 
-@Mod(modid = CustomMapsTools.MODID, name = CustomMapsTools.NAME, version = CustomMapsTools.VERSION, dependencies="required-after:")
+@Mod(modid = CustomMapsTools.MODID, name = CustomMapsTools.NAME, version = CustomMapsTools.VERSION)//, dependencies="required-after:")
 public class CustomMapsTools
 {
     // forge mod stuff
