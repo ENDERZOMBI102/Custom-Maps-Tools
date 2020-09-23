@@ -3,10 +3,10 @@ package com.enderzombi102.cmt;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
@@ -70,4 +70,5 @@ public class Utilities {
 	public static String getConfigDirPath() {
 		return Loader.instance().getConfigDir().getPath();
 	}
+	
 }

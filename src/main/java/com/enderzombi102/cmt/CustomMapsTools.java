@@ -1,16 +1,17 @@
 package com.enderzombi102.cmt;
 
-import net.minecraft.init.Blocks;
+import com.enderzombi102.cmt.tweaks.ClientTweaker;
+import com.enderzombi102.cmt.tweaks.ServerTweaker;
+
+import commands.Commands;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-
-import com.enderzombi102.cmt.tweaks.*;
-
-@Mod(modid = CustomMapsTools.MODID, name = CustomMapsTools.NAME, version = CustomMapsTools.VERSION)//, dependencies="required-after:")
+@Mod(modid = CustomMapsTools.MODID, name = CustomMapsTools.NAME, version = CustomMapsTools.VERSION, modLanguage = "java")//, dependencies="required-after:")
 public class CustomMapsTools
 {
     // forge mod stuff
@@ -26,8 +27,7 @@ public class CustomMapsTools
 	private static LogHelper logger;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         // registering stuff
     	MinecraftForge.EVENT_BUS.register(instance);
     	MinecraftForge.EVENT_BUS.register( new ConfigHandler() );
@@ -41,9 +41,16 @@ public class CustomMapsTools
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        // some example code
-        LogHelper.info("DIRT BLOCK >> " + Blocks.DIRT.getRegistryName());
+    public void init(FMLInitializationEvent event) {
+    	LogHelper.info("registering client commands!");
+        Commands.CRegister();
+        LogHelper.info("finished registering client commands!");
+    }
+    
+    @EventHandler
+    public void serverStart(FMLServerStartingEvent event) {
+    	LogHelper.info("registering server commands!");
+    	Commands.SRegister( event );
+    	LogHelper.info("finished registering server commands!");
     }
 }

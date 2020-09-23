@@ -2,7 +2,6 @@ package com.enderzombi102.cmt.tweaks;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.File;
@@ -13,6 +12,7 @@ import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
 import com.enderzombi102.cmt.ConfigHandler;
@@ -20,21 +20,21 @@ import com.enderzombi102.cmt.LogHelper;
 import com.enderzombi102.cmt.Utilities;
 
 @SideOnly(Side.CLIENT)
-public class ClientTweaker {
+public class ClientTweaker extends CommonTweaker {
 	
-	private Minecraft mcinstance = Minecraft.getMinecraft();
-	
-	public ClientTweaker() {
-
-		LogHelper.info(mcinstance.mcDataDir.getPath());
+	public void update() {
+		this.updateIcon();
+		this.updateTitle();
+		this.updateMOTD();
 	}
 	
-	public void MotdSetter() {
+	public void updateMOTD() {
 		LogHelper.info("setting integrated server's MOTD!");
-		if (mcinstance.getIntegratedServer() != null) {
+		if ( mcinstance.isIntegratedServerRunning() ) {
 	        mcinstance.getIntegratedServer().setMOTD(ConfigHandler.ConfigData.intServMotd);
 		} else {
-			LogHelper.info("we're running on dedicated server, skipping");
+			if ( mcinstance.player == null) LogHelper.info("we're not in-game, skipping");
+			else if (mcinstance.player.world.isRemote) LogHelper.info("we're connected to a server, skipping");
 		}
 	}
 	
@@ -46,7 +46,6 @@ public class ClientTweaker {
 	}
 	
 	public void updateIcon() {
-		// TODO: finish this shit
 		InputStream icon16 = null, icon32 = null;
 		LogHelper.info("checking icons");
 		LogHelper.info("16: ".concat(ConfigHandler.ConfigData.iconPath16));
@@ -89,6 +88,18 @@ public class ClientTweaker {
 		} catch(Exception e) {
 			LogHelper.error("Error while reading file: " + e);
 		}
+	}
+
+	public void updatePosition(int x, int y) {
+		Display.setLocation(x, y);
+	}
+	
+	public void updateSize(int width, int height) {
+		
+	}
+	
+	public void showPopup(String title, String message) {
+		Sys.alert(title, message);
 	}
 	
 }

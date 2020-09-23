@@ -6,7 +6,7 @@
 	  "version": "${version}",
 	  "mcversion": "${mcversion}",
 	  "url": "https://github.com/ENDERZOMBI102/Custom-Maps-Tools/",
-	  "updateUrl": "https://raw.githubusercontent.com/ENDERZOMBI102/Custom-Maps-Tools/master/version.json",
+	  "updateJSON": "https://raw.githubusercontent.com/ENDERZOMBI102/Custom-Maps-Tools/master/version.json",
 	  "authorList": ["ENDERZOMBI102"],
 	  "credits": "The Forge and FML guys, for making Forge",
 	  "logoFile": "",

@@ -3,7 +3,6 @@ package com.enderzombi102.cmt;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
-import net.minecraftforge.common.config.Config.RequiresWorldRestart;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -23,17 +22,20 @@ public class ConfigHandler {
         if (!event.getModID().equals(CustomMapsTools.MODID)) return;
         ConfigManager.sync(CustomMapsTools.MODID, Type.INSTANCE);
         // icon
-        CustomMapsTools.CTweaker.updateIcon();
-        CustomMapsTools.CTweaker.updateTitle();
+        CustomMapsTools.CTweaker.update();
+        CustomMapsTools.STweaker.update();
     }
 	
 	@Config(modid = CustomMapsTools.MODID, type = Type.INSTANCE, name = "CustomMapsTools")
 	public static class ConfigData {
 		
-		@RequiresWorldRestart
-		@Name("integrated server MOTD")
+		@Name("Integrated server MOTD")
 		@Comment("leave blank for default MOTD")
 		public static String intServMotd = "";
+		
+		@Name("Auto share to lan")
+		@Comment("automatically share world to lan")
+		public static boolean autoServerShare = false;
 		
 		@Name("Game window title")
 		@Comment("the game window title is set to this value")
